@@ -5,6 +5,7 @@ import config from './tamagui.config'
 import { User } from './src/components/User'
 import ChangeTheme from './src/components/ChangeTheme'
 import { useState } from 'react'
+import { Carousel } from './src/components/Carousel'
 
 export default function App() {
   const colorScheme = useColorScheme()
@@ -16,7 +17,6 @@ export default function App() {
     Inter: require('@tamagui/font-inter/otf/Inter-Medium.otf'),
     InterBold: require('@tamagui/font-inter/otf/Inter-Bold.otf'),
   })
-  console.log(colorScheme)
   if (!loaded) {
     return null
   }
@@ -40,6 +40,7 @@ export default function App() {
             <User />
             <ChangeTheme onCheckedChange={setIsDarkTheme} />
           </XStack>
+          <Carousel />
         </YStack>
       </Theme>
     </TamaguiProvider>

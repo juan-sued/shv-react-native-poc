@@ -11,8 +11,8 @@ export function User() {
         />
       </Avatar>
       <YStack>
-        <XStack space="$1">
-          <H4 color="$gray10" size={2}>
+        <XStack space="$1.5">
+          <H4 color="$gray10" size="$5">
             Olá,
           </H4>
           <H4 fontWeight="500" marginTop="$-1">
