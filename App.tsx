@@ -1,6 +1,6 @@
 import { useFonts } from 'expo-font'
 import { StatusBar, useColorScheme } from 'react-native'
-import { TamaguiProvider, XStack, YStack, Theme } from 'tamagui'
+import { TamaguiProvider, XStack, YStack, Theme, Text } from 'tamagui'
 import config from './tamagui.config'
 import { User } from './src/components/User'
 import ChangeTheme from './src/components/ChangeTheme'
@@ -30,13 +30,13 @@ export default function App() {
           barStyle="dark-content"
           hidden={true}
         />
-        <YStack
-          flex={1}
-          backgroundColor="$background"
-          padding="$6"
-          paddingTop="$8"
-        >
-          <XStack justifyContent="space-between" alignItems="center">
+        <YStack flex={1} backgroundColor="$background">
+          <XStack
+            justifyContent="space-between"
+            alignItems="center"
+            padding="$6"
+            paddingTop="$8"
+          >
             <User />
             <ChangeTheme onCheckedChange={setIsDarkTheme} />
           </XStack>
