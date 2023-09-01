@@ -1,51 +1,66 @@
-import { useRef } from 'react'
-import { Animated, Dimensions } from 'react-native'
-import { XStack, Image, YStack } from 'tamagui'
+import { Dimensions } from 'react-native'
+import { XStack, Image, YStack, Card, View, Text, H3 } from 'tamagui'
+import * as React from 'react'
 
+import ReactNativeReanimatedCarousel from 'react-native-reanimated-carousel'
+import Animated, {
+  Extrapolate,
+  interpolate,
+  useAnimatedStyle,
+  useSharedValue,
+} from 'react-native-reanimated'
 export function Carousel() {
-  const scrollX = useRef(new Animated.Value(0)).current
   const data = [
-    'https://cdn.dribbble.com/users/3281732/screenshots/9165292/media/ccbfbce040e1941972dbc6a378c35e98.jpg',
+    'https://cdn.dribbble.com/users/3281732/screenshots/10940512/media/b2a8ea95c550e5f09d0ca07682a3c0da.jpg',
     'https://cdn.dribbble.com/users/3281732/screenshots/6784133/samji_illustrator.jpeg',
     'https://cdn.dribbble.com/users/3281732/screenshots/10940512/media/b2a8ea95c550e5f09d0ca07682a3c0da.jpg',
   ]
   const { width } = Dimensions.get('screen')
 
-  const imageW = width * 0.9
-  const imageH = imageW * 1
-  function renderCard({ item }: { item: string }) {
-    return (
-      <YStack
-        width={width}
-        justifyContent="center"
-        alignItems="center"
-        shadowOpacity={0.5}
-        shadowColor="#000"
-        shadowRadius={20}
-        elevation={10}
-      >
-        <Image
-          source={{ width: imageW, height: imageH, uri: item }}
-          resizeMode="cover"
-          alt="imagem"
-          borderRadius={16}
-        />
-      </YStack>
-    )
-  }
-
   return (
-    <XStack alignItems="center" flex={1}>
-      <Animated.FlatList
+    <XStack alignItems="center">
+      <ReactNativeReanimatedCarousel
+        loop
+        mode="parallax"
+        width={width}
+        height={width / 2}
         data={data}
-        onScroll={Animated.event(
-          [{ nativeEvent: { contentOffset: { x: scrollX } } }],
-          { useNativeDriver: true },
-        )}
-        keyExtractor={(_, index) => index.toString()}
-        horizontal
+        scrollAnimationDuration={1400}
+        onSnapToItem={(index) => console.log('current index:', index)}
         pagingEnabled
-        renderItem={renderCard}
+        renderItem={(link) => (
+          <Card
+            flex={1}
+            width="stretch"
+            justifyContent="center"
+            height="stretch"
+            borderRadius={10}
+            overflow="hidden"
+            position="relative" // Adicione esta linha para definir o posicionamento como relativo
+          >
+            <Image
+              flex={1}
+              source={{ uri: link.item }}
+              resizeMode="cover"
+              alt="aa"
+            />
+            <View
+              backgroundColor="rgba(211, 49, 0, 0.18)"
+              position="absolute"
+              top={0}
+              bottom={0}
+              left={0}
+              right={0}
+              justifyContent="flex-end"
+              alignItems="flex-start"
+              height="strech"
+            >
+              <H3 height="strech" color="$white" backgroundColor="red">
+                Novo canal de atendimento
+              </H3>
+            </View>
+          </Card>
+        )}
       />
     </XStack>
   )
